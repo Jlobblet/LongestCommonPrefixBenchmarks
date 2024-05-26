@@ -1,6 +1,6 @@
 ﻿namespace LongestCommonPrefixBenchmarks.Implementations;
 
-public static class FullFor
+public static class ForCharByChar
 {
     public static string LongestCommonPrefix(string[] strings)
     {
