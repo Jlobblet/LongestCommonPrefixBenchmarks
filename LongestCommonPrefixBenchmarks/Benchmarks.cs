@@ -16,7 +16,7 @@ public class Benchmarks
 
     private const int MinWordLength = 5;
     private const int MaxWordLength = 20;
-    public const string WordParts = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private const string WordParts = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private string[] _strings = null!;
 
@@ -24,7 +24,7 @@ public class Benchmarks
 
     [Params(1000)] public int N { get; set; }
 
-    public static string GenerateRandomWord(int minLength = MinWordLength, int maxLength = MaxWordLength)
+    private static string GenerateRandomWord(int minLength = MinWordLength, int maxLength = MaxWordLength)
     {
         var length = Random.Shared.Next(minLength, maxLength);
         var chars = Enumerable.Range(0, length).Select(_ => WordParts[Random.Shared.Next(WordParts.Length)]).ToArray();
@@ -57,7 +57,7 @@ public class Benchmarks
                 res = Enumerable.Repeat(word, n).ToArray();
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(paramName: nameof(strategy));
         }
 
         return res;
