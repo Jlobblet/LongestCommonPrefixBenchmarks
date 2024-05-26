@@ -15,7 +15,7 @@ public static class ForStringByString
                     break;
 
             if (i == 0) return "";
-            prefixLength = i;            
+            prefixLength = i;
         }
 
         return strings[0][..prefixLength];
