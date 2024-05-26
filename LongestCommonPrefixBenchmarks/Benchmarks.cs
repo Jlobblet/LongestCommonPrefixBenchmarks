@@ -80,7 +80,7 @@ public class Benchmarks
     // }
 
     [Benchmark(Baseline = true)]
-    public string FullFor()
+    public string ForCharByChar()
     {
         return Implementations.ForCharByChar.LongestCommonPrefix(_strings);
     }
@@ -98,7 +98,7 @@ public class Benchmarks
     // }
 
     [Benchmark]
-    public string FullForTranposed()
+    public string ForStringByString()
     {
         return Implementations.ForStringByString.LongestCommonPrefix(_strings);
     }
