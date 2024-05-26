@@ -16,7 +16,7 @@ public class Benchmarks
 
     private const int MinWordLength = 5;
     private const int MaxWordLength = 20;
-    private const string WordParts = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public const string WordParts = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private string[] _strings = null!;
 
@@ -24,7 +24,7 @@ public class Benchmarks
 
     [Params(1000)] public int N { get; set; }
 
-    private string GenerateRandomWord(int minLength = MinWordLength, int maxLength = MaxWordLength)
+    public static string GenerateRandomWord(int minLength = MinWordLength, int maxLength = MaxWordLength)
     {
         var length = Random.Shared.Next(minLength, maxLength);
         var chars = Enumerable.Range(0, length).Select(_ => WordParts[Random.Shared.Next(WordParts.Length)]).ToArray();
@@ -34,25 +34,33 @@ public class Benchmarks
     [GlobalSetup]
     public void GlobalSetup()
     {
-        switch (Strategy)
+        _strings = GenerateStringArray(N, Strategy);
+    }
+
+    public static string[] GenerateStringArray(int n, WordSimilarityStrategy strategy)
+    {
+        string[] res;
+        switch (strategy)
         {
             case WordSimilarityStrategy.NoneGuaranteed:
-                _strings = Enumerable.Range(0, N).Select(_ => GenerateRandomWord()).ToArray();
+                res = Enumerable.Range(0, n).Select(_ => GenerateRandomWord()).ToArray();
                 break;
             case WordSimilarityStrategy.NearStart:
             case WordSimilarityStrategy.NearEnd:
-                var prefixLength = Strategy == WordSimilarityStrategy.NearStart ? 3 : 10;
+                var prefixLength = strategy == WordSimilarityStrategy.NearStart ? 3 : 10;
                 var prefix = GenerateRandomWord(prefixLength)[..prefixLength];
-                _strings = Enumerable.Repeat(prefix, N)
+                res = Enumerable.Repeat(prefix, n)
                     .Select(p => p + GenerateRandomWord(maxLength: MaxWordLength - prefixLength)).ToArray();
                 break;
             case WordSimilarityStrategy.Identical:
                 var word = GenerateRandomWord();
-                _strings = Enumerable.Repeat(word, N).ToArray();
+                res = Enumerable.Repeat(word, n).ToArray();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        return res;
     }
 
     // [Benchmark]
