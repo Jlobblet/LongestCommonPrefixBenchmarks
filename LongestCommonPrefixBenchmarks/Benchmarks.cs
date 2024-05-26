@@ -3,6 +3,7 @@
 namespace LongestCommonPrefixBenchmarks;
 
 [MemoryDiagnoser]
+[MaxRelativeError(0.005)]
 public class Benchmarks
 {
     public enum WordSimilarityStrategy
