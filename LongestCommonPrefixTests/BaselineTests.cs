@@ -16,6 +16,17 @@ public class BaselineTests
         return vs.Strings.All(s => s.StartsWith(prefix));
     }
 
+    [Property]
+    public bool OracleResultIsLongestPrefix(ValidStrings vs)
+    {
+        var prefix = Oracle(vs.Strings);
+        var minLength = vs.Strings.Min(s => s.Length);
+        return Enumerable.Range(0, minLength)
+            .Where(i => i > prefix.Length)
+            .Select(i => vs.Strings[0][..i])
+            .All(p => !vs.Strings.All(s => s.StartsWith(p)));
+    }
+
     [Theory]
     [InlineData(new[] { "foobar", "foobaz", "food" }, "foo")]
     [InlineData(new[] { "foo", "foobar", "foobazquz" }, "foo")]
