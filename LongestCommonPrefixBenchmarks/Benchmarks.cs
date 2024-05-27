@@ -3,7 +3,7 @@
 namespace LongestCommonPrefixBenchmarks;
 
 [MemoryDiagnoser]
-[MaxRelativeError(0.005)]
+[MaxRelativeError(0.02)]
 public class Benchmarks
 {
     public enum WordSimilarityStrategy
@@ -47,7 +47,8 @@ public class Benchmarks
                 break;
             case WordSimilarityStrategy.NearStart:
             case WordSimilarityStrategy.NearEnd:
-                var prefixLength = strategy == WordSimilarityStrategy.NearStart ? 3 : 10;
+                var mult = strategy == WordSimilarityStrategy.NearStart ? 0.25 : 0.75;
+                var prefixLength = (int)(MaxWordLength * mult);
                 var prefix = GenerateRandomWord(prefixLength)[..prefixLength];
                 res = Enumerable.Repeat(prefix, n)
                     .Select(p => p + GenerateRandomWord(maxLength: MaxWordLength - prefixLength)).ToArray();
@@ -57,7 +58,7 @@ public class Benchmarks
                 res = Enumerable.Repeat(word, n).ToArray();
                 break;
             default:
-                throw new ArgumentOutOfRangeException(paramName: nameof(strategy));
+                throw new ArgumentOutOfRangeException(nameof(strategy));
         }
 
         return res;
@@ -93,11 +94,11 @@ public class Benchmarks
         return Implementations.ForCharByChar.LongestCommonPrefix(_strings);
     }
 
-    [Benchmark]
-    public string Unsafe()
-    {
-        return Implementations.Unsafe.LongestCommonPrefix(_strings);
-    }
+    // [Benchmark]
+    // public string Unsafe()
+    // {
+    //     return Implementations.Unsafe.LongestCommonPrefix(_strings);
+    // }
 
     // [Benchmark]
     // public string MinMax()
@@ -109,5 +110,11 @@ public class Benchmarks
     public string ForStringByString()
     {
         return Implementations.ForStringByString.LongestCommonPrefix(_strings);
+    }
+
+    [Benchmark]
+    public string VectorXor()
+    {
+        return Implementations.VectorXor.LongestCommonPrefix(_strings);
     }
 }

@@ -92,4 +92,12 @@ public class BaselineTests
         var expected = Oracle(vs.Strings);
         return actual == expected;
     }
+
+    [Property]
+    public bool VectorXorSameAsOracle(ValidStrings vs)
+    {
+        var actual = VectorXor.LongestCommonPrefix(vs.Strings);
+        var expected = Oracle(vs.Strings);
+        return actual == expected;
+    }
 }
