@@ -18,7 +18,7 @@ To run the benchmarks, execute the following commands in the root directory of t
 
 ```bash
 dotnet test
-dotnet run -c Release -p LongestCommonPrefixBenchmarks/LongestCommonPrefixBenchmarks.csproj
+dotnet run -c Release --project LongestCommonPrefixBenchmarks/LongestCommonPrefixBenchmarks.csproj
 ```
 
 It is recommended to run tests first to ensure that the implementations are correct before running the benchmarks.
