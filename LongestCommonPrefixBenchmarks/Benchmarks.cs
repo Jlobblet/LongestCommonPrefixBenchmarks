@@ -110,56 +110,29 @@ public class Benchmarks
     }
 
     // [Benchmark]
-    // public string PairwiseLength()
-    // {
-    //     return Implementations.PairwiseLength.LongestCommonPrefix(_strings);
-    // }
+    // public string PairwiseLength() => Implementations.PairwiseLength.LongestCommonPrefix(_strings);
 
     // [Benchmark]
-    // public string PairwiseString()
-    // {
-    //     return Implementations.PairwiseString.LongestCommonPrefix(_strings);
-    // }
+    // public string PairwiseString() => Implementations.PairwiseString.LongestCommonPrefix(_strings);
 
     // [Benchmark]
-    // public string SalvageFor()
-    // {
-    //     return Implementations.SalvageFor.LongestCommonPrefix(_strings);
-    // }
+    // public string SalvageFor() => Implementations.SalvageFor.LongestCommonPrefix(_strings);
 
     // [Benchmark]
-    // public string SalvageLinq()
-    // {
-    //     return Implementations.SalvageLinq.LongestCommonPrefix(_strings);
-    // }
+    // public string SalvageLinq() => Implementations.SalvageLinq.LongestCommonPrefix(_strings);
 
     [Benchmark(Baseline = true)]
-    public string ForCharByChar()
-    {
-        return Implementations.ForCharByChar.LongestCommonPrefix(_strings);
-    }
+    public string ForCharByChar() => Implementations.ForCharByChar.LongestCommonPrefix(_strings);
 
     // [Benchmark]
-    // public string Unsafe()
-    // {
-    //     return Implementations.Unsafe.LongestCommonPrefix(_strings);
-    // }
+    // public string Unsafe() => Implementations.Unsafe.LongestCommonPrefix(_strings);
 
     // [Benchmark]
-    // public string MinMax()
-    // {
-    //     return Implementations.MinMax.LongestCommonPrefix(_strings);
-    // }
+    // public string MinMax() => Implementations.MinMax.LongestCommonPrefix(_strings);
 
     [Benchmark]
-    public string ForStringByString()
-    {
-        return Implementations.ForStringByString.LongestCommonPrefix(_strings);
-    }
+    public string ForStringByString() => Implementations.ForStringByString.LongestCommonPrefix(_strings);
 
     [Benchmark]
-    public string VectorXor()
-    {
-        return Implementations.VectorXor.LongestCommonPrefix(_strings);
-    }
+    public string VectorXor() => Implementations.VectorXor.LongestCommonPrefix(_strings);
 }

@@ -11,8 +11,5 @@ public static class PairwiseString
         return left[..i];
     }
 
-    public static string LongestCommonPrefix(string[] strings)
-    {
-        return strings.Aggregate(LongestCommonPrefix);
-    }
+    public static string LongestCommonPrefix(string[] strings) => strings.Aggregate(LongestCommonPrefix);
 }
