@@ -35,8 +35,13 @@ public class VectorXor
     public static string LongestCommonPrefix(string[] strings)
     {
         if (strings.Length == 0) return "";
-        if (strings.Length == 1) return strings[0];
         var prefix = strings[0];
+        if (strings.Length == 1) return prefix;
+        if (prefix.Length == 0) return "";
+        for (var j = 1; j < strings.Length; j++)
+            if (strings[j].Length == 0 || strings[j][0] != prefix[0])
+                return "";
+
         var length = VectorPrefix(strings[0], strings[1]);
         for (var j = 2; j < strings.Length; j++)
         {
