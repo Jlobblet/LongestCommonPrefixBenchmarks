@@ -49,9 +49,9 @@ public class Benchmarks
             case WordSimilarityStrategy.NearEnd:
                 var mult = strategy == WordSimilarityStrategy.NearStart ? 0.25 : 0.75;
                 var prefixLength = (int)(MaxWordLength * mult);
-                var prefix = GenerateRandomWord(prefixLength)[..prefixLength];
+                var prefix = GenerateRandomWord(prefixLength, prefixLength);
                 res = Enumerable.Repeat(prefix, n)
-                    .Select(p => p + GenerateRandomWord(maxLength: MaxWordLength - prefixLength)).ToArray();
+                    .Select(p => p + GenerateRandomWord(Math.Max(MinWordLength - prefixLength, 0), MaxWordLength - prefixLength)).ToArray();
                 break;
             case WordSimilarityStrategy.Identical:
                 var word = GenerateRandomWord();
