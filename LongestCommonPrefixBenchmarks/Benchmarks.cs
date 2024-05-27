@@ -29,11 +29,9 @@ public class Benchmarks
 
     private string[] _strings = null!;
 
-    [ParamsAllValues] public WordSimilarityStrategy Strategy { get; set; }
-
-    [ParamsAllValues] public WordLength Length { get; set; }
-
-    [Params(1000)] public int N { get; set; }
+    [Params(1000, Priority = 0)] public int N { get; set; }
+    [ParamsAllValues(Priority = 1)] public WordLength Length { get; set; }
+    [ParamsAllValues(Priority = 2)] public WordSimilarityStrategy Strategy { get; set; }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int MinWordLength(WordLength length) => length switch
