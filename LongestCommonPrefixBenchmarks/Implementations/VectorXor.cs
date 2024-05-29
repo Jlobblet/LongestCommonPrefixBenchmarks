@@ -14,8 +14,7 @@ public class VectorXor
             {
                 var leftVector = Vector.Load((ushort*)leftPtr + offset);
                 var rightVector = Vector.Load((ushort*)rightPtr + offset);
-                var xor = leftVector ^ rightVector;
-                if (!Vector.EqualsAll(xor, Vector<ushort>.Zero)) break;
+                if (!Vector.EqualsAll(leftVector ^ rightVector, Vector<ushort>.Zero)) break;
             }
 
             for (; offset < maxLength; offset++)
