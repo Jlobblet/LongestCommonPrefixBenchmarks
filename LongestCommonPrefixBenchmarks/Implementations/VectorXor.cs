@@ -10,18 +10,12 @@ public class VectorXor
         fixed (char* leftPtr = left, rightPtr = right)
         {
             var offset = 0;
-            var buf = stackalloc ushort[Vector<ushort>.Count];
-            var span = new Span<ushort>(buf, Vector<ushort>.Count);
             for (; offset + Vector<ushort>.Count <= maxLength; offset += Vector<ushort>.Count)
             {
                 var leftVector = Vector.Load((ushort*)leftPtr + offset);
                 var rightVector = Vector.Load((ushort*)rightPtr + offset);
                 var xor = leftVector ^ rightVector;
-                if (Vector.Sum(xor) == 0) continue;
-
-                xor.Store(buf);
-                var inc = span.IndexOfAnyExcept((ushort)0);
-                return offset + inc;
+                if (!Vector.EqualsAll(xor, Vector<ushort>.Zero)) break;
             }
 
             for (; offset < maxLength; offset++)
