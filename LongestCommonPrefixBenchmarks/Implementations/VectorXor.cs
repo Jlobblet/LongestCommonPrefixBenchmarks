@@ -20,7 +20,7 @@ public class VectorXor
 
             for (; offset < maxLength; offset++)
                 if (leftPtr[offset] != rightPtr[offset])
-                    return offset;
+                    break;
 
             return offset;
         }
