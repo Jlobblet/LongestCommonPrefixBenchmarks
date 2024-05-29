@@ -4,7 +4,7 @@ using Xunit;
 
 namespace LongestCommonPrefixTests;
 
-[Properties(Arbitrary = [typeof(ValidStringArb)])]
+[Properties(Arbitrary = [typeof(ValidStringArb)], MaxTest = 1000)]
 public class BaselineTests
 {
     private static readonly Func<string[], string> Oracle = ForCharByChar.LongestCommonPrefix;
